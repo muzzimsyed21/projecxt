@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="US-ASCII">
+<title>Insert title here</title>
+<script>
+function inputCreator(id,value){
+
+ if(document.getElementById(id).checked)
+ {
+  document.getElementById(value).style.visibility = "initial"; 
+  document.getElementById(value).value = "";
+ }
+ else
+ { 
+   document.getElementById(value).style.visibility = "hidden";
+   document.getElementById(value).value = "";
+ }	    
+}
+</script>
+</head>
+<body>
+<h2>Please chose the FIELD </h2><br>
+<form method="get" action="http://localhost:8080/projecxt/main">
+<input type="checkbox" name="fieldType" id ="t"value="title" onClick="inputCreator(this.id,this.value)">Title
+<input type="text" name="search" id="title" style = "visibility : hidden"><br>
+<br>
+<input type="checkbox" name="fieldType" id ="di" value="director" onClick="inputCreator(this.id,this.value)">Director
+<input type="text" name="search" id="director" style = "visibility : hidden"><br>
+<br>
+<input type="checkbox" name="fieldType" id ="da" value="year" onClick="inputCreator(this.id,this.value)">Year
+<input type="text" name="search" id="year" style = "visibility : hidden"><br>
+<br>
+<input type="checkbox" name="fieldType" id = "s" value="name" onClick="inputCreator(this.id,this.value)">Star's Name
+<input type="text" name="search" id="name" style = "visibility : hidden"><br>
+<input type="hidden" name="sorted" value="false" /> 
+<input type="hidden" name="order" value="false" /> 
+<input type="hidden" name="limit" value="5" /> 
+<input type="hidden" name="offset" value="0" /> 
+
+<br>
+<h2>SEARCH</h2><br>
+<input type="submit">
+</form>
+
+<form method="get" action="http://localhost:8080/projecxt/ByGenres">
+<h1>SEARCH BY GENRES</h1><br>
+<input type="submit">
+</form>
+<form method="get" action="http://localhost:8080/projecxt/ByTitles">
+<h1>SEARCH BY TITLE</h1><br>
+<input type="submit">
+</form>
+<form method="post" action="http://localhost:8080/projecxt/emplogin">
+<h1>ADD MOVIE</h1><br>
+<input type="submit">
+</form>
+<form method="get" action="http://localhost:8080/projecxt/error_report">
+<h1>GENRATE ERROR REPORT</h1><br>
+<input type="submit">
+</form>
+<form method="get" action="http://localhost:8080/projecxt/UMI">
+<h1>USER MANAGEMENT INTERFACE</h1><br>
+<input type="submit">
+</form>
+</body>
+</html>
