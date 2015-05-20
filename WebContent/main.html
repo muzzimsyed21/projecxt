@@ -8,7 +8,7 @@ function inputCreator(id,value){
 
  if(document.getElementById(id).checked)
  {
-  document.getElementById(value).style.visibility = "initial"; 
+  document.getElementById(value).style.visibility = "visible"; 
   document.getElementById(value).value = "";
  }
  else
@@ -17,9 +17,38 @@ function inputCreator(id,value){
    document.getElementById(value).value = "";
  }	    
 }
+
+
+//-----SEARCH BAR SCRIPT---
+	function generateAutoComplete() {
+
+
+		
+	}
+	  	
+
 </script>
 </head>
 <body>
+
+<!-- SEARCH BAR HTML -->
+	<div class="container">
+		<div class="vertical-center-row" id="divControl">
+			<div align="center">
+               	<h1 id="header">Search your movie</h1>
+					
+
+					<form action="http://localhost:8080/projecxt/ListMoviesServlet" method="get">
+						<input type="search" name="title" value="Enter a movie" oninput="generateAutoComplete();" id="searchText">
+						<input type="submit" value="Search">
+					</form>
+	        
+
+	        </div>
+	    </div>
+	</div>
+
+
 <h2>Please chose the FIELD </h2><br>
 <form method="get" action="http://localhost:8080/projecxt/main">
 <input type="checkbox" name="fieldType" id ="t"value="title" onClick="inputCreator(this.id,this.value)">Title

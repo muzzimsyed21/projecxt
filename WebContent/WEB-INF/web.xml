@@ -140,7 +140,7 @@
     <servlet-name>ShowUsersServlet</servlet-name>
     <url-pattern>/showusers</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>EditServlet</servlet-name>
     <servlet-class>project.EditServlet</servlet-class>
   </servlet>
