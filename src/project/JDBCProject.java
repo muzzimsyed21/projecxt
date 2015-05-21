@@ -195,7 +195,34 @@ public class JDBCProject
          
 		return Records; 
      }
-       
+      
+    public static void searchTitle(String searchQuery) throws Exception{
+    	System.out.println(searchQuery); 
+
+    	Statement select = connection.createStatement();
+    	//System.out.println(searchQuery); 
+    	String queryString = "SELECT m.title FROM movies m WHERE m.title LIKE '%"+searchQuery+"%'"; 
+    	//System.out.println(queryString); 
+    	
+    	ResultSet result = select.executeQuery(queryString); 
+        
+    	ArrayList<String> Records = new ArrayList<String>();
+         
+         if (!result.next()) {
+  	       System.out.println("No record found");
+         }
+         else{
+  	          do
+              {
+               String resultRecord = result.getString(1);                           
+               Records.add(resultRecord); 
+               resultRecord="";               
+              }while (result.next());
+             }
+         
+System.out.println(Records);
+}
+    
      public static ArrayList<String> searchGenres() throws Exception{
     	 Statement select = connection.createStatement();
          ResultSet result = select.executeQuery
@@ -696,5 +723,5 @@ public class JDBCProject
  public static void editUser(String command) throws Exception{
 	 Statement select = connection.createStatement();
      select.execute(command);
-  }
+ }
 }
