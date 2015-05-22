@@ -156,4 +156,12 @@
     <servlet-name>EditUserServlet</servlet-name>
     <url-pattern>/editusers</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ListMoviesServlet</servlet-name>
+    <servlet-class>project.ListMoviesServlet</servlet-class>
+  </servlet>
+  	<servlet-mapping>
+		<servlet-name>ListMoviesServlet</servlet-name>
+		<url-pattern>/listmovies</url-pattern>
+	</servlet-mapping>
 </web-app>

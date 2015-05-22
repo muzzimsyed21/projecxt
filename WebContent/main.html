@@ -22,20 +22,28 @@ function inputCreator(id,value){
 //-----SEARCH BAR SCRIPT---
 	function generateAutoComplete() {
 
-		var xmlhttp = new XMLHttpRequest();
+		var words = document.getElementById("searchText").value;
+		var requestToServlet = new XMLHttpRequest();
+		var servletResponse; 
 		
 
-		xmlhttp.onreadystatechange = function() {
+		requestToServlet.onreadystatechange = function() {
 	        
-	        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-	               var a = xmlhttp.responseText;
-	        	   document.getElementById("myDiv").innerHTML = a;
+	        if (requestToServlet.readyState == 4) {
+	        		
+
+	        		servletResponse = requestToServlet.responseText; 
+	  
+	               	var div = document.getElementById("autoDIV");
+
+	        	   	div.innerHTML = servletResponse;
+
 	        }
     	}		
 
-		xmlhttp.open("GET", "http://localhost:8080/projecxt/ListMoviesServlet", true);
-		xmlhttp.send();
-
+    	var reqString = "ListMoviesServlet?terms=" + words;
+		requestToServlet.open("GET", reqString, true);
+		requestToServlet.send(null);
 		
 	}
 	  	
@@ -50,19 +58,29 @@ function inputCreator(id,value){
 			<div align="center">
                	<h1 id="header">Search your movie</h1>
 					
-
-					<form action="http://localhost:8080/projecxt/ListMoviesServlet" method="get">
-						<input type="search" name="title" value="Enter a movie" oninput="generateAutoComplete();" id="searchText">
+			<tr>
+				<td>
+<!-- 					<form action="ListMoviesServlet" method="get">
+ -->						<input type="search" name="title" value="Search your movies" oninput="generateAutoComplete();" id="searchText">
 						<input type="submit" value="Search">
-					</form>
-	        
+<!-- 					</form>
+ -->				</td>
+			</tr>
+			
+			<tr>
+				<td align="center">
+					<div id="searchResults">
+					</div>
+				</td>
+			</tr>
 
 	        </div>
 	    </div>
 	</div>
 
-	<div id="myDiv">
-	</div>
+
+
+
 
 <h2>Please chose the FIELD </h2><br>
 <form method="get" action="http://localhost:8080/projecxt/main">

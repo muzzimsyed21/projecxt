@@ -1,4 +1,5 @@
 package project;
+import java.io.PrintWriter;
 import java.sql.*;                              
 import java.util.ArrayList;
 
@@ -195,33 +196,77 @@ public class JDBCProject
          
 		return Records; 
      }
-      
-    public static void searchTitle(String searchQuery) throws Exception{
-    	System.out.println(searchQuery); 
+    
+    //FUNCTION FOR THE SEARCH ENGINE QUERY
+    public static ArrayList<String> searchTitle(String clientRequestText, PrintWriter out) throws Exception{
+    	//System.out.println(clientRequestText); 
 
     	Statement select = connection.createStatement();
-    	//System.out.println(searchQuery); 
-    	String queryString = "SELECT m.title FROM movies m WHERE m.title LIKE '%"+searchQuery+"%'"; 
-    	//System.out.println(queryString); 
+		String[] titleToWords = clientRequestText.split(" ");
+		String queryString = "SELECT title FROM movies "; 
+		int wordCount = titleToWords.length; 
+		
+		if (wordCount < 1 || titleToWords[0] == ""){
+				
+				out.write("");
+				
+		}
+		
+		else {
+			
+			if (wordCount < 2){
+				
+				queryString += "WHERE (title LIKE '" + titleToWords[wordCount - 1] + "%' OR title LIKE '%" + titleToWords[wordCount - 1] + "%') ";
+
+			}
+			else{
+				
+				queryString+= "WHERE (title LIKE '"+ titleToWords[0]+ "%' OR title LIKE '%" +titleToWords[0] + "' OR title LIKE '%" + titleToWords[0]+"%')"; 
+				
+				for (int i=1; i<wordCount -1; i++){
+					
+					queryString += "AND (title LIKE '" + titleToWords[i] + "%' OR title LIKE '%" + titleToWords[i] + "' OR title LIKE '%" + titleToWords[i] + "%') ";
+					queryString += "AND (title LIKE '" + titleToWords[wordCount - 1] + "%' OR title LIKE '%" + titleToWords[wordCount - 1] + "%') ";
+					
+				}
+				
+			}
+		}
+			
+			
     	
-    	ResultSet result = select.executeQuery(queryString); 
-        
+    	ResultSet result = select.executeQuery(queryString);     
     	ArrayList<String> Records = new ArrayList<String>();
+        
+        if (!result.next()) {
+ 	       System.out.println("No record found");
+        }
+        else{
+ 	          do
+             {
+              String resultRecord = result.getString("title");                           
+              Records.add(resultRecord); 
+              resultRecord="";               
+             }while (result.next());
+            }
+        
+		return Records; 
+		
+//		if(!result.next())
+//			out.write("");
+//		else {
+//			
+//			result.beforeFirst();
+//			out.println("<ul>");
+//			while(result.next()) {
+//				out.write("<li>" + result.getString("title") + "</li>");
+//			}
+//			out.write("</ul>");
+//		}
          
-         if (!result.next()) {
-  	       System.out.println("No record found");
-         }
-         else{
-  	          do
-              {
-               String resultRecord = result.getString(1);                           
-               Records.add(resultRecord); 
-               resultRecord="";               
-              }while (result.next());
-             }
+           
          
-System.out.println(Records);
-}
+    }
     
      public static ArrayList<String> searchGenres() throws Exception{
     	 Statement select = connection.createStatement();
@@ -724,4 +769,6 @@ System.out.println(Records);
 	 Statement select = connection.createStatement();
      select.execute(command);
  }
+ 
+ 
 }
