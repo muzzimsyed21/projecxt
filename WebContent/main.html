@@ -33,7 +33,7 @@ function inputCreator(id,value){
 	        		
 
 	        		servletResponse = requestToServlet.responseText; 
-	  
+
 	               	var div = document.getElementById("autoDIV");
 
 	        	   	div.innerHTML = servletResponse;
@@ -41,10 +41,10 @@ function inputCreator(id,value){
 	        }
     	}		
 
-    	var reqString = "ListMoviesServlet?terms=" + words;
-		requestToServlet.open("GET", reqString, true);
-		requestToServlet.send(null);
-		
+    	var reqString = "ListMoviesServlet";
+		requestToServlet.open("POST", reqString, true);
+		requestToServlet.send("title=" + words);
+
 	}
 	  	
 

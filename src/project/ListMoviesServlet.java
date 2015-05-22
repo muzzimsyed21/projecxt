@@ -32,18 +32,7 @@ public class ListMoviesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PrintWriter out = response.getWriter();
-		String clientRequestText = request.getParameter("title");
-		
-		try {
-			
-			ArrayList<String> records = JDBCProject.searchTitle(clientRequestText, out);
-			System.out.println(records);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+
 		
 	}
 
@@ -53,6 +42,20 @@ public class ListMoviesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response); 
+		
+		PrintWriter out = response.getWriter();
+		String clientRequestText = request.getParameter("title");
+		System.out.println(clientRequestText);
+		
+		try {
+			
+			ArrayList<String> records = JDBCProject.searchTitle(clientRequestText, out);
+			//System.out.println(records);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }

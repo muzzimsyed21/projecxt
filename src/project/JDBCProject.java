@@ -200,7 +200,7 @@ public class JDBCProject
     //FUNCTION FOR THE SEARCH ENGINE QUERY
     public static ArrayList<String> searchTitle(String clientRequestText, PrintWriter out) throws Exception{
     	//System.out.println(clientRequestText); 
-
+    	
     	Statement select = connection.createStatement();
 		String[] titleToWords = clientRequestText.split(" ");
 		String queryString = "SELECT title FROM movies "; 
@@ -249,7 +249,7 @@ public class JDBCProject
               resultRecord="";               
              }while (result.next());
             }
-        
+        System.out.println(Records); 
 		return Records; 
 		
 //		if(!result.next())
